@@ -1,6 +1,10 @@
 This is a folder for all R code
 
-## Folder Structure
-Clean Up 
+## Analysis 
+microbiome numbers over time
+microbiome species over time
 
-Analysis 
+## Clean Up 
+fasta files
+Excel files
+
