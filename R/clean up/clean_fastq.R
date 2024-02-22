@@ -59,8 +59,18 @@ for (i in seq_along(fn_fs)) {
                     compress = TRUE)
 }
 
-# Diagnostic plot
+# remove redundancies
+derep_fs <- derepFastq(filt_fs)
+derep_rs <- derepFastq(filt_rs)
 
+# assign sample names
+sam_names <- sapply(strsplit(basename(filt_fs), "_"), "[", 1)
+names(derep_fs) <- sam_names
+names(derep_rs) <- sam_names
+
+# estimate sequencing error rates from subset of data
+ddf <- dada(derep_fs[1:40], err = NULL, selfConsist = TRUE)
+ddr <- dada(derep_rs[1:40], err = NULL, selfConsist = TRUE)
 
 # Save data
 filename <- "data/clean_data.Rdata"
