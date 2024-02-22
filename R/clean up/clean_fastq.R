@@ -23,16 +23,41 @@ filt_path <- file.path("data", "modified", "mouse")
 # list of all file names
 fns <- sort(list.files(miseq_path, full.names = TRUE))
 # forward sequence
-fnFs <- fns[grepl("R1", fns)]
+fn_fs <- fns[grepl("R1", fns)]
 # reverse sequence
-fnRs <- fns[grepl("R2", fns)]
+fn_rs <- fns[grepl("R2", fns)]
+
+# examine read quality
+# plot quality of both forward and reverse reads
+# examine plots to get forward (f) and reverse (r) trimming parameters
+ii <- sample(length(fn_fs), 3)
+for (i in ii) {
+  print(plotQualityProfile(fn_fs[i]) + ggtitle("Forward"))
+}
+for (i in ii) {
+  print(plotQualityProfile(fn_rs[i]) + ggtitle("Reverse"))
+}
+
+# save quality plots
+
+
+# trimming parameters
+f_start <- 10
+f_end <- 245
+r_start <- 10
+r_end <- 160
 
 # trim and filter sequences
-# needs to be modified after looking at actual data
-# plot quality of both forward and reverse reads
-ii <- sample(length(fnFs), 3)
-for(i in ii) {print(plotQualityProfile(fnFs[i]) + ggtitle("Forward"))}
-for(i in ii) {print(plotQualityProfile(fnRs[i]) + ggtitle("Reverse"))}
+filt_fs <- file.path(filt_path, basename(fn_fs))
+filt_rs <- file.path(filt_path, basename(fn_rs))
+for (i in seq_along(fn_fs)) {
+  fastqPairedFilter(c(fn_fs[[i]], fn_rs[[i]]),
+                    c(filt_fs[[i]], filt_rs[[i]]),
+                    trimLeft = c(f_start, r_start),
+                    truncLen = c(f_end, r_end),
+                    maxN = 0, maxEE = 2, truncQ = 2,
+                    compress = TRUE)
+}
 
 # Diagnostic plot
 
