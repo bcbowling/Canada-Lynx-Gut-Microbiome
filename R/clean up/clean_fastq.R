@@ -72,6 +72,10 @@ names(derep_rs) <- sam_names
 ddf <- dada(derep_fs[1:40], err = NULL, selfConsist = TRUE)
 ddr <- dada(derep_rs[1:40], err = NULL, selfConsist = TRUE)
 
+# inspect error rates
+plotErrors(ddf)
+plotErrors(ddr)
+
 # Save data
 filename <- "data/clean_data.Rdata"
 save(clean_data, file = filename)
