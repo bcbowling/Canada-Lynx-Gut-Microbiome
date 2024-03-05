@@ -9,6 +9,8 @@ All code divided into subfolders based on these general functions:
 ### Clean up data 
 Initial fastq clean up code modified from [Callahan et al. 2016](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4955027/)
 
+Taxonomy assignment: Wang, Q, G. M. Garrity, J. M. Tiedje, and J. R. Cole. 2007. Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Appl Environ Microbiol. 73(16):5261-7.
+
 ### Analysis of data 
 ## Results
 Outputs from analysis
