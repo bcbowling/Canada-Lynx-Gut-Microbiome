@@ -18,7 +18,7 @@ library("phangorn")
 # import and group data
 # folder path to raw data
 miseq_path <- file.path("data", "raw", "mouse")
-# folder path for newly cleaned data
+# folder path for filtered data
 filt_path <- file.path("data", "modified", "mouse")
 # list of all file names
 fns <- sort(list.files(miseq_path, full.names = TRUE))
@@ -29,17 +29,18 @@ fn_rs <- fns[grepl("R2", fns)]
 
 # examine read quality
 # plot quality of both forward and reverse reads
-# examine plots to get forward (f) and reverse (r) trimming parameters
+# examine and save plots to get forward (f) and reverse (r) trimming parameters
 ii <- sample(length(fn_fs), 3)
 for (i in ii) {
   print(plotQualityProfile(fn_fs[i]) + ggtitle("Forward"))
 }
+ggsave(filename = "Forward_Quality_Plot.pdf",
+       path = "figures/qaqc", height = 6, width = 4, units = "in")
 for (i in ii) {
   print(plotQualityProfile(fn_rs[i]) + ggtitle("Reverse"))
 }
-
-# save quality plots
-
+ggsave(filename = "Reverse_Quality_Plot.pdf",
+       path = "figures/qaqc", height = 6, width = 4, units = "in")
 
 # trimming parameters
 f_start <- 10
@@ -72,9 +73,14 @@ names(derep_rs) <- sam_names
 ddf <- dada(derep_fs[1:40], err = NULL, selfConsist = TRUE)
 ddr <- dada(derep_rs[1:40], err = NULL, selfConsist = TRUE)
 
-# inspect error rates
+# Inspect error rates and save plots
+# Errors should match reasonably well
 plotErrors(ddf)
+ggsave(filename = "Forward_Error_Plot.pdf",
+       path = "figures/qaqc", height = 9, width = 6, units = "in")
 plotErrors(ddr)
+ggsave(filename = "Reverse_Error_Plot.pdf",
+       path = "figures/qaqc", height = 9, width = 6, units = "in")
 
 # Use error rates to remove errors from forward and reverse reads
 # pool needs to be false for larger datasets
@@ -91,14 +97,25 @@ dada_rs <- dada(derep_rs,
 mergers <- mergePairs(dada_fs, derep_fs, dada_rs, derep_rs)
 
 # Construct sequence table
-seqtab_all <- makeSequenceTable(mergers[!grep1("Mock", names(mergers))])
+seqtab_all <- makeSequenceTable(mergers[!grepl("Mock", names(mergers))])
 
 # Remove chimeras
 seqtab <- removeBimeraDenovo(seqtab_all)
 
-# Assign taxonomy #need to find this training file
-ref_fasta <- "data/rdp_train_set_14.fa.gz"
+# Assign taxonomy
+ref_fasta <- "data/modified/rdp_train_set_19.fa.gz"
 taxtab <- assignTaxonomy(seqtab, refFasta = ref_fasta)
+colnames(taxtab) <- c("Kingdom", "Phylum", "Class",
+                      "Order", "Family", "Genus")
+
+# Temporary save files
+save(taxtab, file = "data/modified/taxonomy_table.Rdata")
+save(seqtab, file = "data/modified/sequence_table.Rdata")
+
+# Construct initial phylogenetic tree
+seqs <- getSequences(seqtab)
+names(seqs) <- seqs
+alignment
 
 # Save data
 filename <- "data/clean_data.Rdata"
