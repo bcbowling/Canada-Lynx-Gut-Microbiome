@@ -76,6 +76,30 @@ ddr <- dada(derep_rs[1:40], err = NULL, selfConsist = TRUE)
 plotErrors(ddf)
 plotErrors(ddr)
 
+# Use error rates to remove errors from forward and reverse reads
+# pool needs to be false for larger datasets
+dada_fs <- dada(derep_fs,
+                err = ddf[[1]]$err_out,
+                pool = TRUE,
+                multithread = TRUE)
+dada_rs <- dada(derep_rs,
+                err = ddr[[1]]$err_out,
+                pool = TRUE,
+                multithread = TRUE)
+
+# Combine forward and reverse reads
+mergers <- mergePairs(dada_fs, derep_fs, dada_rs, derep_rs)
+
+# Construct sequence table
+seqtab_all <- makeSequenceTable(mergers[!grep1("Mock", names(mergers))])
+
+# Remove chimeras
+seqtab <- removeBimeraDenovo(seqtab_all)
+
+# Assign taxonomy #need to find this training file
+ref_fasta <- "data/rdp_train_set_14.fa.gz"
+taxtab <- assignTaxonomy(seqtab, refFasta = ref_fasta)
+
 # Save data
 filename <- "data/clean_data.Rdata"
 save(clean_data, file = filename)
