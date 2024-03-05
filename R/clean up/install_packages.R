@@ -11,3 +11,5 @@ BiocManager::install(pkgs = c("BiocStyle",
                               "DECIPHER",
                               "phangorn"),
                      version = "3.16")
+install.packages("fastmap")
+install.packages("RSQLite")
