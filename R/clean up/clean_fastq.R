@@ -112,10 +112,52 @@ colnames(taxtab) <- c("Kingdom", "Phylum", "Class",
 save(taxtab, file = "data/modified/taxonomy_table.Rdata")
 save(seqtab, file = "data/modified/sequence_table.Rdata")
 
-# Construct initial phylogenetic tree
+# Load in temporary files
+load(file = "data/modified/taxonomy_table.Rdata")
+load(file = "data/modified/sequence_table.Rdata")
+
+# Align sequences
 seqs <- getSequences(seqtab)
 names(seqs) <- seqs
-alignment
+alignment <- AlignSeqs(DNAStringSet(seqs), anchor = NA)
+
+# Phylogenetic tree parameters
+gam_int <- 4 # number of discrete gamma intervals
+inv_prop <- 0.2 # proportion of invariable sites
+
+# Construct initial phylogenetic tree
+phang_align <- phyDat(as(alignment, "matrix"), type = "DNA")
+dm <- dist.ml(phang_align)
+treenj <- NJ(dm)
+fit <- pml(treenj, data = phang_align, k = gam_int, inv = inv_prop)
+fit_gtr <- optim.pml(fit, model = "GTR",
+                     optInv = TRUE, optGamma = TRUE,
+                     rearrangement = "stochastic",
+                     control = pml.control(trace = 0))
+
+# Save intermediate file
+save(fit_gtr, file = "data/modified/phylogenetic_tree.Rdata")
+
+# Load in intermediate files
+load(file = "data/modified/phylogenetic_tree.Rdata")
+
+# Upload csv data
+mimarks_path <- "data/raw/mouse/MIMARKS_Data_combined.csv"
+samdf <- read.csv(mimarks_path, header = TRUE)
+
+# Modify csv
+samdf$sample_id <- paste0(gsub("00", "", samdf$host_subject_id),
+                          "D", samdf$age - 21)
+samdf <- samdf[!duplicated(samdf$sample_id), ] # remove duplicate entries
+# fixing an error with this dataset
+rownames(seqtab) <- gsub("124", "125", rownames(seqtab))
+
+# Check if csv id's match sequence table id's (should return TRUE)
+all(rownames(seqtab) %in% samdf$sample_id)
+
+# Continue modifying csv
+rownames(samdf) <- samdf$sample_id
+
 
 # Save data
 filename <- "data/clean_data.Rdata"
