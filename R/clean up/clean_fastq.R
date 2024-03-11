@@ -157,7 +157,17 @@ all(rownames(seqtab) %in% samdf$sample_id)
 
 # Continue modifying csv
 rownames(samdf) <- samdf$sample_id
+keep_cols <- c("collection_date", "biome", "target_gene",
+               "target_subfragment", "host_common_name",
+               "host_subject_id", "age", "sex", "body_product",
+               "tot_mass", "diet", "family_relationship",
+               "genotype", "sample_id")
+samdf <- samdf[rownames(seqtab), keep_cols]
 
+# Create phyloseq object for analysis
+ps <- phyloseq(tax_table(taxtab), sample_data(samdf),
+               otu_table(seqtab, taxa_are_rows = FALSE),
+               phy_tree(fit_gtr$tree))
 
 # Save data
 filename <- "data/clean_data.Rdata"
