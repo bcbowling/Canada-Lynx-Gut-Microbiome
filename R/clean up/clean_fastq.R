@@ -1,4 +1,4 @@
-# clean up fasta data
+# clean up fastq data
 # create a sequence table for phyloseq
 
 # clear workspace and close graphics
