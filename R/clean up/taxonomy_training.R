@@ -1,4 +1,5 @@
 # Using Ribosomal Database Project training set 19
+# Modify training set to format needed
 dada2:::makeTaxonomyFasta_RDP(file.path("data", "raw",
                                         "RDPTraining",
                                         "trainset19_072023.fa"),
