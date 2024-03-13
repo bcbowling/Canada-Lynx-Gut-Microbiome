@@ -1,19 +1,16 @@
 # clean up fasta data
-# prepare it to run through analysis
+# create a sequence table for phyloseq
 
 # clear workspace and close graphics
 rm(list = ls())
 graphics.off()
 
-# load R packages
+# load required packages
 library("knitr")
 library("BiocStyle")
 library("ggplot2")
 library("gridExtra")
 library("dada2")
-library("phyloseq")
-library("DECIPHER")
-library("phangorn")
 
 # import and group data
 # folder path to raw data
@@ -73,8 +70,8 @@ names(derep_rs) <- sam_names
 ddf <- dada(derep_fs[1:40], err = NULL, selfConsist = TRUE)
 ddr <- dada(derep_rs[1:40], err = NULL, selfConsist = TRUE)
 
-# Inspect error rates and save plots
-# Errors should match reasonably well
+# inspect error rates and save plots
+# errors should match reasonably well
 plotErrors(ddf)
 ggsave(filename = "Forward_Error_Plot.pdf",
        path = "figures/qaqc", height = 9, width = 6, units = "in")
@@ -82,7 +79,7 @@ plotErrors(ddr)
 ggsave(filename = "Reverse_Error_Plot.pdf",
        path = "figures/qaqc", height = 9, width = 6, units = "in")
 
-# Use error rates to remove errors from forward and reverse reads
+# use error rates to remove errors from forward and reverse reads
 # pool needs to be false for larger datasets
 dada_fs <- dada(derep_fs,
                 err = ddf[[1]]$err_out,
@@ -93,82 +90,14 @@ dada_rs <- dada(derep_rs,
                 pool = TRUE,
                 multithread = TRUE)
 
-# Combine forward and reverse reads
+# combine forward and reverse reads
 mergers <- mergePairs(dada_fs, derep_fs, dada_rs, derep_rs)
 
-# Construct sequence table
+# construct sequence table
 seqtab_all <- makeSequenceTable(mergers[!grepl("Mock", names(mergers))])
 
-# Remove chimeras
+# remove chimeras
 seqtab <- removeBimeraDenovo(seqtab_all)
 
-# Assign taxonomy
-ref_fasta <- "data/modified/rdp_train_set_19.fa.gz"
-taxtab <- assignTaxonomy(seqtab, refFasta = ref_fasta)
-colnames(taxtab) <- c("Kingdom", "Phylum", "Class",
-                      "Order", "Family", "Genus")
-
-# Temporary save files
-save(taxtab, file = "data/modified/taxonomy_table.Rdata")
-save(seqtab, file = "data/modified/sequence_table.Rdata")
-
-# Load in temporary files
-load(file = "data/modified/taxonomy_table.Rdata")
-load(file = "data/modified/sequence_table.Rdata")
-
-# Align sequences
-seqs <- getSequences(seqtab)
-names(seqs) <- seqs
-alignment <- AlignSeqs(DNAStringSet(seqs), anchor = NA)
-
-# Phylogenetic tree parameters
-gam_int <- 4 # number of discrete gamma intervals
-inv_prop <- 0.2 # proportion of invariable sites
-
-# Construct initial phylogenetic tree
-phang_align <- phyDat(as(alignment, "matrix"), type = "DNA")
-dm <- dist.ml(phang_align)
-treenj <- NJ(dm)
-fit <- pml(treenj, data = phang_align, k = gam_int, inv = inv_prop)
-fit_gtr <- optim.pml(fit, model = "GTR",
-                     optInv = TRUE, optGamma = TRUE,
-                     rearrangement = "stochastic",
-                     control = pml.control(trace = 0))
-
-# Save intermediate file
-save(fit_gtr, file = "data/modified/phylogenetic_tree.Rdata")
-
-# Load in intermediate files
-load(file = "data/modified/phylogenetic_tree.Rdata")
-
-# Upload csv data
-mimarks_path <- "data/raw/mouse/MIMARKS_Data_combined.csv"
-samdf <- read.csv(mimarks_path, header = TRUE)
-
-# Modify csv
-samdf$sample_id <- paste0(gsub("00", "", samdf$host_subject_id),
-                          "D", samdf$age - 21)
-samdf <- samdf[!duplicated(samdf$sample_id), ] # remove duplicate entries
-# fixing an error with this dataset
-rownames(seqtab) <- gsub("124", "125", rownames(seqtab))
-
-# Check if csv id's match sequence table id's (should return TRUE)
-all(rownames(seqtab) %in% samdf$sample_id)
-
-# Continue modifying csv
-rownames(samdf) <- samdf$sample_id
-keep_cols <- c("collection_date", "biome", "target_gene",
-               "target_subfragment", "host_common_name",
-               "host_subject_id", "age", "sex", "body_product",
-               "tot_mass", "diet", "family_relationship",
-               "genotype", "sample_id")
-samdf <- samdf[rownames(seqtab), keep_cols]
-
-# Create phyloseq object for analysis
-ps <- phyloseq(tax_table(taxtab), sample_data(samdf),
-               otu_table(seqtab, taxa_are_rows = FALSE),
-               phy_tree(fit_gtr$tree))
-
-# Save data
-filename <- "data/modified/mouse/combined_data.Rdata"
-save(ps, file = filename)
+# save sequence table
+save(seqtab, file = "data/modified/mouse/sequence_table.Rdata")
