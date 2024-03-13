@@ -170,5 +170,5 @@ ps <- phyloseq(tax_table(taxtab), sample_data(samdf),
                phy_tree(fit_gtr$tree))
 
 # Save data
-filename <- "data/clean_data.Rdata"
-save(clean_data, file = filename)
+filename <- "data/modified/mouse/combined_data.Rdata"
+save(ps, file = filename)
