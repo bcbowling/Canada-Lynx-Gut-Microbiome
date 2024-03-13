@@ -1,6 +1,4 @@
 # install all packages required for clean up code
-
-# clean fastq packages
 install.packages("knitr")
 install.packages("BiocManager")
 install.packages("gridExtra")
