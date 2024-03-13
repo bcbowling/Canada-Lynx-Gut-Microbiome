@@ -29,8 +29,10 @@ Species | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7
 4 | 0.125 | 0.15 | 0.2 | 0.25 | 0.25 | 0.3 | 0.35
 ## Figures
 Figure outputs 
-![Error Plot with Nucleotide Changes for Forward Reads](/figures/qaqc/Forward_Error_Plot.pdf)
-![Error Plot with Nucleotide Changes for Reverse Reads](/figures/qaqc/Reverse_Error_Plot.pdf)
+
+[Error Plot with Nucleotide Changes for Forward Reads](/figures/qaqc/Forward_Error_Plot.pdf)
+
+[Error Plot with Nucleotide Changes for Reverse Reads](/figures/qaqc/Reverse_Error_Plot.pdf)
 
 ## Equations 
 (will update with any actual equations used, currently just here for formatting)
