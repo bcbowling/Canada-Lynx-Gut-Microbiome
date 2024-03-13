@@ -2,8 +2,12 @@
 ## Objectives
 Take microbiome data from repeated scat samples and analyze how it changes over time
 ## Data
-Raw and cleaned data in both Excel and fastq file formats
+Raw and cleaned fastq data
+
+Taxonomy training files
 ## R
+Specific workflow detailed in [R README](/R/README.md)
+
 All code divided into subfolders based on these general functions:
 
 ### Clean up data 
@@ -12,6 +16,7 @@ Initial fastq clean up code modified from [Callahan et al. 2016](https://www.ncb
 Taxonomy assignment: Wang, Q, G. M. Garrity, J. M. Tiedje, and J. R. Cole. 2007. Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Appl Environ Microbiol. 73(16):5261-7.
 
 ### Analysis of data 
+(in progress)
 ## Results
 Outputs from analysis
 ## Tables
@@ -24,7 +29,8 @@ Species | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7
 4 | 0.125 | 0.15 | 0.2 | 0.25 | 0.25 | 0.3 | 0.35
 ## Figures
 Figure outputs 
-![Example Figure from Marmot Work (will replace with actual figure later)](/figures/Hoary%20Melanistic%20Graph.jpg)
+![Error Plot with Nucleotide Changes for Forward Reads](/figures/qaqc/Forward_Error_Plot.pdf)
+![Error Plot with Nucleotide Changes for Reverse Reads](/figures/qaqc/Reverse_Error_Plot.pdf)
 
 ## Equations 
 (will update with any actual equations used, currently just here for formatting)
