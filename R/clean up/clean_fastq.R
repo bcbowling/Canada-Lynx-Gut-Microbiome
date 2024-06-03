@@ -31,12 +31,12 @@ ii <- sample(length(fn_fs), 3)
 for (i in ii) {
   print(plotQualityProfile(fn_fs[i]) + ggtitle("Forward"))
 }
-ggsave(filename = "Forward_Quality_Plot.pdf",
+ggsave(filename = "Forward_Quality_Plot.jpg",
        path = "figures/qaqc", height = 6, width = 4, units = "in")
 for (i in ii) {
   print(plotQualityProfile(fn_rs[i]) + ggtitle("Reverse"))
 }
-ggsave(filename = "Reverse_Quality_Plot.pdf",
+ggsave(filename = "Reverse_Quality_Plot.jpg",
        path = "figures/qaqc", height = 6, width = 4, units = "in")
 
 # trimming parameters
