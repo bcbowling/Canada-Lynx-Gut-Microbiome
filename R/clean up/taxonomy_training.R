@@ -1,5 +1,7 @@
 # modify training set to format needed for dada2 package
 # using Ribosomal Database Project training set 19
+# probably will not need this for new method
+# leaving it just in case
 
 # load required packages
 library("dada2")

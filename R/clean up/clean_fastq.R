@@ -122,6 +122,10 @@ mergers <- mergePairs(dada_fs, derep_fs, dada_rs, derep_rs)
 # construct sequence table
 seqtab_all <- makeSequenceTable(mergers)
 
+# inspect sequence table dimensions and sequence lengths
+dim(seqtab_all)
+table(nchar(getSequences(seqtab_all)))
+
 # remove chimeras
 seqtab <- removeBimeraDenovo(seqtab_all)
 
