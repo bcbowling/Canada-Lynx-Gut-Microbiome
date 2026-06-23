@@ -1,0 +1,117 @@
+SampleID,ScatID,Individual,Date,Day,Scat_Moisture,Soil_Moisture,Sampling_Time,Scat_Extracted,Qubit,Volume,DNA_Available,SpeedVac,WGA,Notes
+MA1-00,MA1,Marty,9/12/2024,0,Nor,Wet+,16:20,96,42000,18,756,Y,Y,Deposited overnight
+MA1-01,MA1,Marty,9/13/2024,1,Wet,Dry,14:00,98,42800,18,770.4,Y,Y,
+MA1-02,MA1,Marty,9/14/2024,2,Nor,Dry,15:00,156,57000,18,1026,Y,Y,
+MA1-03,MA1,Marty,9/15/2024,3,Wet,Dry,13:45,96,57000,18,1026,Y,Y,
+MA1-04,MA1,Marty,9/16/2024,4,Nor,Dry,12:40,104,56000,36,2016,Y,Y,
+MA1-05,MA1,Marty,9/17/2024,5,Nor,Dry+,13:00,165,60000,18,1080,Y,Y,Covered in white-brown fuzz
+MA1-06,MA1,Marty,9/18/2024,6,Wet,Dry,12:40,109,10200,18,183.6,Y,Y,Covered in white fuzz
+MA1-07,MA1,Marty,9/19/2024,7,Wet,Dry+,12:30,98,38500,18,693,Y,Y,Covered in white fuzz
+MA2-00,MA2,Marty,9/13/2024,0,Nor,Dry,14:00,80,57000,18,1026,Y,Y,Picked up 8AM
+MA2-01,MA2,Marty,9/14/2024,1,Nor,Dry,15:00,81,53000,18,954,Y,Y,Has small white dots on it
+MA2-02,MA2,Marty,9/15/2024,2,Dry,Dry+,13:45,52,57000,18,1026,Y,Y,Has small white dots on it
+MA2-03,MA2,Marty,9/16/2024,3,Wet,Dry+,12:40,189,60000,18,1080,Y,Y,Covered in white spots
+MA2-04,MA2,Marty,9/17/2024,4,Dry,Dry+,13:00,113,52000,18,936,Y,Y,Covered in white fuzz
+MA2-05,MA2,Marty,9/18/2024,5,Nor,Dry+,12:40,100,55000,18,990,Y,Y,Covered in white fuzz
+MA2-06,MA2,Marty,9/19/2024,6,Nor,Dry+,12:30,104,51000,180,9180,Y,Y,Covered in white fuzz
+MA2-07,MA2,Marty,9/20/2024,7,Nor,Dry+,13:00,88,54000,18,972,Y,Y,Covered in white fuzz
+MA3-00,MA3,Marty,9/14/2024,0,Dry,Dry,15:00,128,56000,18,1008,Y,Y,"Picked up 7AM, longer dark segment and short light brown segment, sampled from darker segment)"
+MA3-01,MA3,Marty,9/15/2024,1,Nor,Dry,13:45,199,59000,18,1062,Y,Y,Sampled from dark segment
+MA3-02,MA3,Marty,9/16/2024,2,Wet,Dry,12:40,78,57000,18,1026,Y,Y,Sampled from dark segment
+MA3-03,MA3,Marty,9/17/2024,3,Nor,Dry+,13:00,73,56000,18,1008,Y,Y,Sampled from dark segment
+MA3-04,MA3,Marty,9/18/2024,4,Nor,Dry,12:40,160,55000,18,990,Y,Y,"Covered in white-brown fuzz, sampled from dark segment"
+MA3-05,MA3,Marty,9/19/2024,5,Nor,Dry+,12:30,157,60000,18,1080,Y,Y,"Covered in white-brown fuzz, sampled from dark segment"
+MA3-06,MA3,Marty,9/20/2024,6,Dry,Dry+,13:00,96,49300,122,6014.6,Y,Y,"Completely covered in white fuzz, had to go through at least 1 cm to reach scat, sampled from lighter segment"
+MA3-07,MA3,Marty,9/21/2024,7,Dry,Dry+,12:45,49,47600,64,3046.4,Y,Y,"Completely covered in white fuzz, had to go through at least 1 cm to reach scat, sampled from lighter segment"
+MO1-00,MO1,Monty,9/12/2024,0,Nor,Wet+,16:20,106,1440,98,141.12,N,N,Deposited overnight
+MO1-01,MO1,Monty,9/13/2024,1,Dry,Dry,14:00,40,59000,18,1062,Y,Y,
+MO1-02,MO1,Monty,9/14/2024,2,Wet,Dry,15:00,98,54000,122,6588,Y,Y,
+MO1-03,MO1,Monty,9/15/2024,3,Wet,Dry,13:45,92,56000,18,1008,Y,Y,
+MO1-04,MO1,Monty,9/16/2024,4,Wet,Dry,12:40,99,4180,98,409.64,N,N,
+MO1-05,MO1,Monty,9/17/2024,5,Wet,Dry+,13:00,119,1030,98,100.94,N,N,
+MO1-06,MO1,Monty,9/18/2024,6,Wet,Dry,12:40,135,1100,37,40.7,Y,N,"Covered in white fuzz, part of ethanol vial spilled"
+MO1-07,MO1,Monty,9/19/2024,7,Wet,Dry+,12:30,77,8280,98,811.44,N,N,Covered in white fuzz
+MO2-00,MO2,Monty,9/13/2024,0,Nor,Dry,14:00,202,54000,18,972,Y,Y,Picked up 8AM
+MO2-01,MO2,Monty,9/14/2024,1,Nor,Dry,15:00,31,59000,18,1062,Y,Y,
+MO2-02,MO2,Monty,9/15/2024,2,Nor,Dry+,13:45,19,52000,18,936,Y,Y,
+MO2-03,MO2,Monty,9/16/2024,3,Nor,Dry+,12:40,63,56000,18,1008,Y,Y,
+MO2-04,MO2,Monty,9/17/2024,4,Wet,Dry+,13:00,62,53000,18,954,Y,Y,A little white fuzz
+MO2-05,MO2,Monty,9/18/2024,5,Nor,Dry+,12:40,114,52000,18,936,Y,Y,Covered in white fuzz
+MO2-06,MO2,Monty,9/19/2024,6,Nor,Dry+,12:30,37,2080,37,76.96,Y,N,Covered in white fuzz
+MO2-07,MO2,Monty,9/20/2024,7,Dry+,Dry+,13:00,77,59000,18,1062,Y,Y,Covered in white fuzz
+MO3-00,MO3,Monty,9/14/2024,0,Dry,Dry,15:00,96,53000,18,954,Y,Y,Picked up 7AM
+MO3-01,MO3,Monty,9/15/2024,1,Wet,Dry+,13:45,86,55000,18,990,Y,Y,
+MO3-02,MO3,Monty,9/16/2024,2,Wet,Dry+,12:40,88,56000,18,1008,Y,Y,
+MO3-03,MO3,Monty,9/17/2024,3,Wet,Dry+,13:00,115,56000,18,1008,Y,Y,
+MO3-04,MO3,Monty,9/18/2024,4,Wet,Dry+,12:40,88,43100,64,2758.4,Y,Y,
+MO3-05,MO3,Monty,9/19/2024,5,Wet,Dry+,12:30,140,57000,18,1026,Y,Y,
+MO3-06,MO3,Monty,9/20/2024,6,Wet,Dry+,13:00,143,55000,18,990,Y,Y,Half covered in white fuzz
+MO3-07,MO3,Monty,9/21/2024,7,Nor,Dry+,12:45,87,47600,18,856.8,Y,Y,
+NU1-00,NU1,Nuka,9/13/2024,0,Dry,Dry,14:00,96,44400,18,799.2,Y,Y,"Picked up in morning, best guess Nuka"
+NU1-01,NU1,Nuka,9/14/2024,1,Wet,Dry,15:00,94,55000,64,3520,Y,Y,
+NU1-02,NU1,Nuka,9/15/2024,2,Nor,Dry,13:45,81,56000,18,1008,Y,Y,
+NU1-03,NU1,Nuka,9/16/2024,3,Wet,Dry,12:40,72,25100,18,451.8,Y,Y,
+NU1-04,NU1,Nuka,9/17/2024,4,Nor,Dry+,13:00,90,50000,18,900,Y,Y,Clear sticky substance attaching outside of scat to nearby branch
+NU1-05,NU1,Nuka,9/18/2024,5,Nor,Dry,12:40,103,51000,18,918,Y,Y,
+NU1-06,NU1,Nuka,9/19/2024,6,Nor,Dry+,12:30,90,56000,18,1008,Y,Y,
+NU1-07,NU1,Nuka,9/20/2024,7,Dry,Dry+,13:00,69,48300,18,869.4,Y,Y,
+NU2-00,NU2,Nuka,9/14/2024,0,Nor,Dry,15:00,107,45200,18,813.6,Y,Y,"Overnight, best guess Nuka"
+NU2-01,NU2,Nuka,9/15/2024,1,Nor,Dry+,13:45,107,1860,37,68.82,Y,N,
+NU2-02,NU2,Nuka,9/16/2024,2,Nor,Dry+,12:40,80,53000,18,954,Y,Y,
+NU2-03,NU2,Nuka,9/17/2024,3,Wet,Dry+,13:00,79,3710,98,363.58,N,N,
+NU2-04,NU2,Nuka,9/18/2024,4,Nor,Dry+,12:40,102,2310,37,85.47,Y,N,Several small bugs crawled out of the sample once it was placed in the whirl pak
+NU2-05,NU2,Nuka,9/19/2024,5,Nor,Dry+,12:30,107,52000,64,3328,Y,Y,
+NU2-06,NU2,Nuka,9/20/2024,6,Dry,Dry+,13:00,65,2160,98,211.68,N,N,Small bugs crawled out of sample in whirl pak
+NU2-07,NU2,Nuka,9/21/2024,7,Dry,Dry+,12:45,100,1890,98,185.22,N,N,
+NU3-00,NU3,unknown,9/15/2024,0,Nor,Dry,13:45,40,6780,98,664.44,N,N,"Overnight, best guess Nuka"
+NU3-01,NU3,unknown,9/16/2024,1,Nor,Dry,12:40,93,1840,37,68.08,Y,N,
+NU3-02,NU3,unknown,9/17/2024,2,Nor,Dry+,13:00,24,1490,98,146.02,N,N,
+NU3-03,NU3,unknown,9/18/2024,3,Wet,Dry,12:40,63,1262,90,113.58,N,N,
+NU3-04,NU3,unknown,9/19/2024,4,Nor,Dry+,12:30,84,7830,98,767.34,N,N,
+NU3-05,NU3,unknown,9/20/2024,5,Nor,Dry+,13:00,51,1620,98,158.76,N,N,Partially covered in white fuzz
+NU3-06,NU3,unknown,9/21/2024,6,Dry,Dry+,12:45,98,2310,37,85.47,Y,N,Partially covered in white fuzz
+NU3-07,NU3,unknown,9/22/2024,7,Nor,Dry+,11:50,27,2850,98,279.3,N,N,Partially covered in white fuzz
+OM1-00,OM1,Omak,9/13/2024,0,Nor,Dry,14:00,57,59000,18,1062,Y,Y,Deposited 9:30AM
+OM1-01,OM1,Omak,9/14/2024,1,Dry,Dry,15:00,103,60000,18,1080,Y,Y,
+OM1-02,OM1,Omak,9/15/2024,2,Dry,Dry,13:45,72,51000,122,6222,Y,Y,
+OM1-03,OM1,Omak,9/16/2024,3,Dry,Dry,12:40,41,55000,102,5610,Y,Y,
+OM1-04,OM1,Omak,9/17/2024,4,Dry,Dry+,13:00,42,58000,122,7076,Y,Y,
+OM1-05,OM1,Omak,9/18/2024,5,Dry,Dry,12:40,87,59000,18,1062,Y,Y,
+OM1-06,OM1,Omak,9/19/2024,6,Dry,Dry+,12:30,92,59000,122,7198,Y,Y,
+OM1-07,OM1,Omak,9/20/2024,7,Dry,Dry+,13:00,59,60000,18,1080,Y,Y,
+OM2-00,OM2,Omak,9/14/2024,0,Nor,Dry,15:00,84,1400,98,137.2,N,N,"Morning, best guess Omak"
+OM2-01,OM2,Omak,9/15/2024,1,Dry,Dry+,13:45,72,51000,18,918,Y,Y,
+OM2-02,OM2,Omak,9/16/2024,2,Wet,Dry+,12:40,92,57000,18,1026,Y,Y,
+OM2-03,OM2,Omak,9/17/2024,3,Wet,Dry+,13:00,52,1220,98,119.56,N,N,
+OM2-04,OM2,Omak,9/18/2024,4,Dry,Dry+,12:40,101,60000,64,3840,Y,Y,
+OM2-05,OM2,Omak,9/19/2024,5,Nor,Dry+,12:30,79,3900,98,382.2,N,N,
+OM2-06,OM2,Omak,9/20/2024,6,Nor,Dry+,13:00,103,2130,96,204.48,N,N,Covered in white fuzz
+OM2-07,OM2,Omak,9/21/2024,7,Dry,Dry+,12:45,111,1150,98,112.7,N,N,Covered in white fuzz
+YU1-00,YU1,Yukon,9/12/2024,0,Nor,Wet+,16:20,106,53000,64,3392,Y,Y,Deposited overnight
+YU1-01,YU1,Yukon,9/13/2024,1,Nor,Dry,14:00,60,5500,98,539,N,N,
+YU1-02,YU1,Yukon,9/14/2024,2,Dry,Dry,15:00,102,51000,18,918,Y,Y,
+YU1-03,YU1,Yukon,9/15/2024,3,Wet,Dry,13:45,50,55000,36,1980,Y,Y,
+YU1-04,YU1,Yukon,9/16/2024,4,Nor,Dry,12:40,92,45200,64,2892.8,Y,Y,
+YU1-05,YU1,Yukon,9/17/2024,5,Nor,Dry+,13:00,90,985,98,96.53,N,N,
+YU1-06,YU1,Yukon,9/18/2024,6,Nor,Dry,12:40,67,13700,98,1342.6,N,N,Covered in white fuzz
+YU1-07,YU1,Yukon,9/19/2024,7,Dry,Dry+,12:30,41,5320,98,521.36,N,N,Covered in white fuzz
+YU2-00,YU2,Yukon,9/13/2024,0,Nor,Dry,14:00,93,1990,37,73.63,Y,N,Picked up 8AM
+YU2-01,YU2,Yukon,9/14/2024,1,Wet,Dry,15:00,38,60000,18,1080,Y,Y,
+YU2-02,YU2,Yukon,9/15/2024,2,Wet,Dry+,13:45,104,59000,18,1062,Y,Y,
+YU2-03,YU2,Yukon,9/16/2024,3,Wet,Dry+,12:40,100,1320,98,129.36,N,N,Covered in white spots
+YU2-04,YU2,Yukon,9/17/2024,4,Nor,Dry+,13:00,100,1630,37,60.31,Y,N,Covered in white fuzz
+YU2-05,YU2,Yukon,9/18/2024,5,Wet,Dry+,12:40,99,2210,37,81.77,Y,N,Covered in white fuzz
+YU2-06,YU2,Yukon,9/19/2024,6,Dry,Dry+,12:30,110,43800,18,788.4,Y,Y,Covered in white fuzz
+YU2-07,YU2,Yukon,9/20/2024,7,Dry+,Dry+,13:00,63,1880,98,184.24,N,N,Covered in white fuzz
+YU3-00,YU3,Yukon,9/14/2024,0,Dry,Dry,15:00,97,29300,18,527.4,Y,Y,Picked up 7AM
+YU3-01,YU3,Yukon,9/15/2024,1,Wet,Dry,13:45,113,46300,18,833.4,Y,Y,
+YU3-02,YU3,Yukon,9/16/2024,2,Wet,Dry,12:40,76,1670,98,163.66,N,N,
+YU3-03,YU3,Yukon,9/17/2024,3,Nor,Dry+,13:00,77,58000,18,1044,Y,Y,
+YU3-04,YU3,Yukon,9/18/2024,4,Dry,Dry,12:40,97,32600,18,586.8,Y,Y,Covered in white fuzz
+YU3-05,YU3,Yukon,9/19/2024,5,Nor,Dry+,12:30,62,2280,37,84.36,Y,N,Covered in white fuzz
+YU3-06,YU3,Yukon,9/20/2024,6,Dry,Dry+,13:00,36,2040,37,75.48,Y,N,Covered in white fuzz
+YU3-07,YU3,Yukon,9/21/2024,7,Dry,Dry+,12:45,50,2410,98,236.18,N,N,Covered in white fuzz
+00-N,blank,blank,NA,NA,NA,NA,NA,NA,too low,98,0,N,N,negative control (normal protocol)
+00-NA,blank,blank,NA,NA,NA,NA,NA,NA,134,18,2.412,N,Y,negative control with WGA
+00-S,blank,blank,NA,NA,NA,NA,NA,NA,too low,37,0,Y,N,negative control with speed vac
+00-SA,blank,blank,NA,NA,NA,NA,NA,NA,165,18,2.97,Y,Y,negative control with speed vac and WGA
