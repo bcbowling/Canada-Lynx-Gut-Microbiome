@@ -6,7 +6,7 @@ library("DECIPHER")
 library("phangorn")
 
 # load sequence table
-load(file = "data/modified/mouse/sequence_table.Rdata")
+load(file = "data/modified/zoolynx/intermediates/sequence_table.Rdata")
 
 # align sequences
 seqs <- getSequences(seqtab)
@@ -28,4 +28,4 @@ fit_gtr <- optim.pml(fit, model = "GTR",
                      control = pml.control(trace = 0))
 
 # save phylogenetic tree
-save(fit_gtr, file = "data/modified/mouse/phylogenetic_tree.Rdata")
+save(fit_gtr, file = "data/modified/zoolynx/intermediates/phylogenetic_tree.Rdata")

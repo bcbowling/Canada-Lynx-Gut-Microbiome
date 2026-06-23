@@ -46,24 +46,21 @@ ggsave(filename = "Reverse_Quality_Plot.jpg",
 # try with minimal trimming first to include as much data as possible
 # trim first base because it's more error-prone
 
-# trimming parameters based on quality graphs
-f_start <- 1
-f_end <- 0
-r_start <- 1
-r_end <- 0
+# trimming parameters based on quality graphs and amplicon length
+f_start <- 0
+f_end <- 240
+r_start <- 0
+r_end <- 240
 
 # trim and filter sequences
 # use trimming parameters (above) and standard filtering
 filt_fs <- file.path(filt_path, basename(fn_fs))
 filt_rs <- file.path(filt_path, basename(fn_rs))
-for (i in seq_along(fn_fs)) {
-  fastqPairedFilter(c(fn_fs[[i]], fn_rs[[i]]),
-                    c(filt_fs[[i]], filt_rs[[i]]),
-                    trimLeft = c(f_start, r_start),
-                    truncLen = c(f_end, r_end),
-                    maxN = 0, maxEE = 2, truncQ = 2,
-                    compress = TRUE)
-}
+out <- filterAndTrim(fn_fs, filt_fs,fn_rs, filt_rs,
+                     trimLeft = c(f_start, r_start),
+                     truncLen = c(f_end, r_end),
+                     maxN = 0, maxEE = c(2, 2), truncQ = 2,
+                     compress = TRUE)
 
 # remove redundancies
 derep_fs <- derepFastq(filt_fs)
@@ -129,5 +126,18 @@ table(nchar(getSequences(seqtab_all)))
 # remove chimeras
 seqtab <- removeBimeraDenovo(seqtab_all)
 
+# inspect results
+dim(seqtab)
+sum(seqtab.nochim) / sum(seqtab)
+
 # save sequence table
 save(seqtab, file = "data/modified/zoolynx/intermediates/sequence_table.Rdata")
+
+# track reads through the pipeline (sanity check)
+getN <- function(x) sum(getUniques(x))
+track <- cbind(out, sapply(dada_fs, getN), sapply(dada_rs, getN),
+               sapply(mergers, getN), rowSums(seqtab))
+colnames(track) <- c("input", "filtered", "denoisedF", 
+                     "denoisedR", "merged", "nonchim")
+rownames(track) <- sam_names
+track
