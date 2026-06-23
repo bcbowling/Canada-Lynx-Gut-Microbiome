@@ -7,7 +7,8 @@ BiocManager::install(pkgs = c("BiocStyle",
                               "dada2",
                               "phyloseq",
                               "DECIPHER",
-                              "phangorn"),
+                              "phangorn",
+                              "decontam"),
                      version = "3.22")
 install.packages("fastmap")
 install.packages("RSQLite")

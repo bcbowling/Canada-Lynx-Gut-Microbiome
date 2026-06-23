@@ -23,6 +23,12 @@ ps <- phyloseq(tax_table(taxtab), sample_data(samdf),
                otu_table(seqtab, taxa_are_rows = FALSE),
                phy_tree(fit_gtr$tree))
 
+# put sequences in reference slot and rename variants
+dna <- Biostrings::DNAStringSet(taxa_names(ps))
+names(dna) <- taxa_names(ps)
+ps <- merge_phyloseq(ps, dna)
+taxa_names(ps) <- paste0("ASV", seq(ntaxa(ps)))
+
 # save phyloseq object
 filename <- "data/modified/zoolynx/intermediates/combined_data.Rdata"
 save(ps, file = filename)

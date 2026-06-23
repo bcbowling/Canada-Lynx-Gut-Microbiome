@@ -9,17 +9,20 @@ library("phyloseq")
 library("gridExtra")
 
 # load data
-filename <- "data/modified/mouse/combined_data.Rdata"
+filename <- "data/modified/zoolynx/intermediates/combined_data.Rdata"
 load(filename)
 rm(filename)
 
 # filter data without high-ranking taxonomy
+# show ranks present in the data (for formatting)
+rank_names(ps)
+
 # create table of phyla in data
-table(tax_table(ps)[, "Phylum"], exclude = NULL)
+table(tax_table(ps)[, "phylum"], exclude = NULL)
 
 # remove data with no Phylum designation
-ps0 <- subset_taxa(ps, !is.na(Phylum) &
-                     !Phylum %in% c("", "uncharacterized"))
+ps0 <- subset_taxa(ps, !is.na(phylum) &
+                     !phylum %in% c("", "uncharacterized"))
 
 # find prevalence of different taxa
 prevdf <- apply(X = otu_table(ps0),
