@@ -5,3 +5,5 @@ data/modified/zoolynx/intermediates/derep_fs
 data/modified/zoolynx/intermediates/derep_rs
 data/modified/zoolynx/intermediates/29May2026_ZooMicrobiomeRdata_KME.RData
 /data/raw/trainingsets
+R/clean up/clean_fastq_KME_v2.R
+R/clean up/clean_fastq_KME_hpc.R
