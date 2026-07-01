@@ -56,7 +56,7 @@ r_end <- 240
 # use trimming parameters (above) and standard filtering
 filt_fs <- file.path(filt_path, basename(fn_fs))
 filt_rs <- file.path(filt_path, basename(fn_rs))
-out <- filterAndTrim(fn_fs, filt_fs,fn_rs, filt_rs,
+out <- filterAndTrim(fn_fs, filt_fs, fn_rs, filt_rs,
                      trimLeft = c(f_start, r_start),
                      truncLen = c(f_end, r_end),
                      maxN = 0, maxEE = c(2, 2), truncQ = 2,
@@ -137,7 +137,7 @@ save(seqtab, file = "data/modified/zoolynx/intermediates/sequence_table.Rdata")
 getN <- function(x) sum(getUniques(x))
 track <- cbind(out, sapply(dada_fs, getN), sapply(dada_rs, getN),
                sapply(mergers, getN), rowSums(seqtab))
-colnames(track) <- c("input", "filtered", "denoisedF", 
+colnames(track) <- c("input", "filtered", "denoisedF",
                      "denoisedR", "merged", "nonchim")
 rownames(track) <- sam_names
 track
