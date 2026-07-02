@@ -73,8 +73,8 @@ ggsave(filename = "Phylum_Prevalence.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
 # I'm not going to set a higher prevalence threshold yet due to WGA
-# revisiting to set low prevalence threshold (~1 sample) based on later analysis
-prevalence_threshold <- 0.01 * nsamples(ps1)
+# revisiting to set low prevalence threshold (~5) based on later analysis
+prevalence_threshold <- 0.05 * nsamples(ps1)
 
 # filter based on prevalence
 keep_taxa <- rownames(prevdf1)[(prevdf1$Prevalence >= prevalence_threshold)]
@@ -96,9 +96,9 @@ ps3_na0 <- tax_glom(ps2, "genus", NArm = TRUE)
 # check cophenetic distances
 base_tree <- phy_tree(ps2)
 cophenetic_distances <- as.dist(cophenetic.phylo(base_tree))
-min(cophenetic_distances) # 3e-08
-max(cophenetic_distances) # 6.4167
-mean(cophenetic_distances) # 1.038477
+min(cophenetic_distances) # at 0.5 = 0.005453256, at 0.1 = 3e-08
+max(cophenetic_distances) # at 0.5 = 6.166199, at 0.1 = 6.4167
+mean(cophenetic_distances) # at 0.5 = 1.008326, at 0.1 = 1.038477
 
 # group ASVs by tree distance
 h1 <- 0.4
@@ -109,27 +109,27 @@ plot_text <- 12
 p2tree <- plot_tree(ps2, method = "treeonly", ladderize = "left",
                     title = "Before Agglomeration") +
   theme(plot.title = element_text(size = plot_text))
-ggsave(filename = "Original_Tree.jpg",
+ggsave(filename = "Original_Tree5.jpg",
        path = "figures/analysis", height = 16, width = 8, units = "in")
 p3tree <- plot_tree(ps3, method = "treeonly", ladderize = "left",
                     title = "By Genus") +
   theme(plot.title = element_text(size = plot_text))
-ggsave(filename = "Genus_Tree.jpg",
+ggsave(filename = "Genus_Tree5.jpg",
        path = "figures/analysis", height = 16, width = 8, units = "in")
 p3tree_na0 <- plot_tree(ps3_na0, method = "treeonly", ladderize = "left",
                         title = "By Genus (no NA)") +
   theme(plot.title = element_text(size = plot_text))
-ggsave(filename = "Genus_Tree_no_NA.jpg",
+ggsave(filename = "Genus_Tree_no_NA5.jpg",
        path = "figures/analysis", height = 16, width = 8, units = "in")
 p4tree <- plot_tree(ps4, method = "treeonly", ladderize = "left",
                     title = "By Height") +
   theme(plot.title = element_text(size = plot_text))
-ggsave(filename = "Height_Tree.jpg",
+ggsave(filename = "Height_Tree5.jpg",
        path = "figures/analysis", height = 16, width = 8, units = "in")
 
 # group trees together
 combined_trees <- grid.arrange(nrow = 1, p2tree, p3tree, p4tree)
-ggsave(filename = "Combined_Trees.jpg", plot = combined_trees,
+ggsave(filename = "Combined_Trees5.jpg", plot = combined_trees,
        path = "figures/analysis")
 
 # compare genus trees with and without NAs
