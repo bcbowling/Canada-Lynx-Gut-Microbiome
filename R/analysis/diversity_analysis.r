@@ -34,7 +34,9 @@ plot_richness(ps2, x = "Day", measures = c("Shannon", "Simpson"),
               color = "Individual")
 ggsave(filename = "Alpha_Diversity_Filtered.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
-
+# label by scat ID
+plot_richness(ps2, x = "Day", measures = c("Shannon", "Simpson"),
+              color = "ScatID")
 # potentially revisit alpha diversity with more complicated plots
 
 # log transform data to normalize a bit
@@ -75,8 +77,12 @@ save(ps3ra, file = filename)
 # get weighted UniFrac ordination
 wunif_ord <- ordinate(ps3, method = "MDS", distance = "wunifrac")
 
+# get weighted UniFrac ordination with logged data
+wunif_ord_log <- ordinate(ps3log, method = "MDS", distance = "wunifrac")
+
 # get Eigenvalues to scale plot (plot with and without scaling)
 wunif_evals <- wunif_ord$values$Eigenvalues
+wunif_evals_log <- wunif_ord_log$values$Eigenvalues
 
 # plot weighted UniFrac ordination by scat, day, and individual
 plot_ordination(ps3, wunif_ord, color = "ScatID", label = "Day",
@@ -97,6 +103,27 @@ plot_ordination(ps3, wunif_ord, color = "ScatID", shape = "Individual",
                 title = "Weighted UniFrac MDS: By Individual") +
   coord_fixed(sqrt(wunif_evals[2] / wunif_evals[1]))
 ggsave(filename = "WUniFrac_Scat_Individual_Scaled.jpg",
+       path = "figures/analysis", height = 8, width = 12, units = "in")
+
+# plot logged weighted UniFrac ordination by scat, day, and individual
+plot_ordination(ps3log, wunif_ord_log, color = "ScatID", label = "Day",
+                title = "Logged Weighted UniFrac MDS: By Day")
+ggsave(filename = "Log_WUniFrac_Scat_Day.jpg",
+       path = "figures/analysis", height = 12, width = 8, units = "in")
+plot_ordination(ps3log, wunif_ord_log, color = "ScatID", shape = "Individual",
+                title = "Logged Weighted UniFrac MDS: By Individual")
+ggsave(filename = "Log_WUniFrac_Scat_Individual.jpg",
+       path = "figures/analysis", height = 12, width = 8, units = "in")
+# with Eigenvalue scaling
+plot_ordination(ps3log, wunif_ord_log, color = "ScatID", label = "Day",
+                title = "Logged Weighted UniFrac MDS: By Day") +
+  coord_fixed(sqrt(wunif_evals_log[2] / wunif_evals_log[1]))
+ggsave(filename = "Log_WUniFrac_Scat_Day_Scaled.jpg",
+       path = "figures/analysis", height = 8, width = 12, units = "in")
+plot_ordination(ps3log, wunif_ord_log, color = "ScatID", shape = "Individual",
+                title = "Logged Weighted UniFrac MDS: By Individual") +
+  coord_fixed(sqrt(wunif_evals_log[2] / wunif_evals_log[1]))
+ggsave(filename = "Log_WUniFrac_Scat_Individual_Scaled.jpg",
        path = "figures/analysis", height = 8, width = 12, units = "in")
 
 # get unweighted UniFrac ordination
