@@ -20,3 +20,7 @@ if (any(!.inst)) {
   source("http://bioconductor.org/biocLite.R")
   biocLite(.bioc_packages[!.inst])
 }
+
+# for BiomeHorizon
+library("devtools")
+devtools::install_github("blekhmanlab/biomehorizon")
