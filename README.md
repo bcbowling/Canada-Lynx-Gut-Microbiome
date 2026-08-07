@@ -27,6 +27,8 @@ Species | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7
 2 | 0.25 | 0.25 | 0.2 | 0.15 | 0.15 | 0.1 | 0.05
 3 | 0.125 | 0.2 | 0.25 | 0.3 | 0.35 | 0.4 | 0.5
 4 | 0.125 | 0.15 | 0.2 | 0.25 | 0.25 | 0.3 | 0.35
+
+MaAsLin2: Mallick H, Rahnavard A, McIver LJ, Ma S, Zhang Y, Nguyen LH, Tickle TL, Weingart G, Ren B, Schwager EH, Chatterjee S, Thompson KN, Wilkinson JE, Subramanian A, Lu Y, Waldron L, Paulson JN, Franzosa EA, Bravo HC, Huttenhower C (2021). Multivariable Association Discovery in Population-scale Meta-omics Studies. PLoS Computational Biology, 17(11):e1009442.
 ## Figures
 Figure outputs 
 
