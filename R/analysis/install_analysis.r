@@ -5,7 +5,7 @@
                     "nlme", "reshape2","devtools", "PMA", "structSSI",
                     "ade4", "igraph", "ggnetwork", "intergraph", "scales")
 .github_packages <- c("jfukuyama/phyloseqGraphTest")
-.bioc_packages <- c("phyloseq", "genefilter", "impute")
+.bioc_packages <- c("phyloseq", "genefilter", "impute", "Maaslin2")
 # Install CRAN packages (if not already installed)
 .inst <- .cran_packages %in% installed.packages()
 if (any(!.inst)) {
@@ -17,8 +17,7 @@ if (any(!.inst)) {
 }
 .inst <- .bioc_packages %in% installed.packages()
 if (any(!.inst)) {
-  source("http://bioconductor.org/biocLite.R")
-  biocLite(.bioc_packages[!.inst])
+  BiocManager::install(.bioc_packages[!.inst])
 }
 
 # for BiomeHorizon

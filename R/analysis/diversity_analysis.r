@@ -86,16 +86,20 @@ wunif_evals_log <- wunif_ord_log$values$Eigenvalues
 
 # plot weighted UniFrac ordination by scat, day, and individual
 plot_ordination(ps3, wunif_ord, color = "ScatID", label = "Day",
-                title = "Weighted UniFrac MDS: By Day")
+                title = "Weighted UniFrac MDS: By Day and Scat")
 ggsave(filename = "WUniFrac_Scat_Day.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 plot_ordination(ps3, wunif_ord, color = "ScatID", shape = "Individual",
                 title = "Weighted UniFrac MDS: By Individual")
 ggsave(filename = "WUniFrac_Scat_Individual.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
+plot_ordination(ps3, wunif_ord, color = "Day",
+                title = "Weighted UniFrac MDS: By Day")
+ggsave(filename = "WUniFrac_Day.jpg",
+       path = "figures/analysis", height = 12, width = 8, units = "in")
 # with Eigenvalue scaling
 plot_ordination(ps3, wunif_ord, color = "ScatID", label = "Day",
-                title = "Weighted UniFrac MDS: By Day") +
+                title = "Weighted UniFrac MDS: By Day and Scat") +
   coord_fixed(sqrt(wunif_evals[2] / wunif_evals[1]))
 ggsave(filename = "WUniFrac_Scat_Day_Scaled.jpg",
        path = "figures/analysis", height = 8, width = 12, units = "in")
@@ -103,6 +107,11 @@ plot_ordination(ps3, wunif_ord, color = "ScatID", shape = "Individual",
                 title = "Weighted UniFrac MDS: By Individual") +
   coord_fixed(sqrt(wunif_evals[2] / wunif_evals[1]))
 ggsave(filename = "WUniFrac_Scat_Individual_Scaled.jpg",
+       path = "figures/analysis", height = 8, width = 12, units = "in")
+plot_ordination(ps3, wunif_ord, color = "Day",
+                title = "Weighted UniFrac MDS: By Day") +
+  coord_fixed(sqrt(wunif_evals[2] / wunif_evals[1]))
+ggsave(filename = "WUniFrac_Day_Scaled.jpg",
        path = "figures/analysis", height = 8, width = 12, units = "in")
 
 # plot logged weighted UniFrac ordination by scat, day, and individual
@@ -173,6 +182,7 @@ filename <- "data/modified/zoolynx/intermediates/bray_curtis_ord.Rdata"
 save(bray_ord, file = filename)
 
 # look at stress plot to see fit
+goodness(bray_ord)
 stressplot(bray_ord)
 
 # plot Bray-Curtis ordination by scat, day, and individual
@@ -186,21 +196,25 @@ point_colors <- scat_colors[as.integer(factor(scat_groups))]
 bray_3d <- ordiplot3d(bray_ord, col = point_colors)
 
 # save 3d plot
-pdf("figures/analysis/Bray_Scat_Day_3d.pdf")
+pdf("figures/analysis/Bray_Scat_Day_3d.pdf", width = 8, height = 8)
+ordiplot3d(bray_ord, col = point_colors)
+dev.off()
+jpeg("figures/analysis/Bray_Scat_Day_3d.jpeg", width = 1800, height = 1800,
+     res = 300)
 ordiplot3d(bray_ord, col = point_colors)
 dev.off()
 
-# compare each pair of axes for day (still Bray-Curtis)
+# compare each pair of axes for day and scat ID(still Bray-Curtis)
 plot_ordination(ps3ra, bray_ord, axes = c(1, 2), color = "ScatID",
-                label = "Day", title = "Bray-Curtis NMDS: By Day")
+                label = "Day", title = "Bray-Curtis NMDS: By Day and Scat")
 ggsave(filename = "Bray_Scat_Day_12.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 plot_ordination(ps3ra, bray_ord, axes = c(1, 3), color = "ScatID",
-                label = "Day", title = "Bray-Curtis NMDS: By Day")
+                label = "Day", title = "Bray-Curtis NMDS: By Day and Scat")
 ggsave(filename = "Bray_Scat_Day_13.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 plot_ordination(ps3ra, bray_ord, axes = c(2, 3), color = "ScatID",
-                label = "Day", title = "Bray-Curtis NMDS: By Day")
+                label = "Day", title = "Bray-Curtis NMDS: By Day and Scat")
 ggsave(filename = "Bray_Scat_Day_23.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
@@ -216,6 +230,20 @@ ggsave(filename = "Bray_Scat_Individual_13.jpg",
 plot_ordination(ps3ra, bray_ord, axes = c(2, 3), color = "ScatID",
                 shape = "Individual", title = "Bray-Curtis NMDS: By Individual")
 ggsave(filename = "Bray_Scat_Individual_23.jpg",
+       path = "figures/analysis", height = 12, width = 8, units = "in")
+
+# plot each pair of axes for day only (still Bray-Curtis)
+plot_ordination(ps3ra, bray_ord, axes = c(1, 2), color = "Day",
+                title = "Bray-Curtis NMDS: By Day")
+ggsave(filename = "Bray_Day_12.jpg",
+       path = "figures/analysis", height = 12, width = 8, units = "in")
+plot_ordination(ps3ra, bray_ord, axes = c(1, 3), color = "Day",
+                title = "Bray-Curtis NMDS: By Day")
+ggsave(filename = "Bray_Day_13.jpg",
+       path = "figures/analysis", height = 12, width = 8, units = "in")
+plot_ordination(ps3ra, bray_ord, axes = c(2, 3), color = "Day",
+                title = "Bray-Curtis NMDS: By Day")
+ggsave(filename = "Bray_Day_23.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
 # get DPCoA ordination from relative abundance data
