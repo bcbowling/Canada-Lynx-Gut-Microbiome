@@ -15,6 +15,11 @@ filename <- "data/modified/zoolynx/intermediates/decontam_combined_data.Rdata"
 load(filename)
 rm(filename)
 
+# check number of reads that passed quality/decontamination filtering
+reads <- as.data.frame(otu_table(ps0))
+reads$total <- rowSums(reads)
+sum(reads$total)
+
 # filter data without high-ranking taxonomy
 # show ranks present in the data (for formatting)
 rank_names(ps0)

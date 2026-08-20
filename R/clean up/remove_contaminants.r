@@ -24,7 +24,7 @@ ocp5 <- isContaminant(ps, neg = neg2, method = "prevalence", threshold = 0.5)
 occ <- isContaminant(ps, conc = conc2, neg = neg2, method = "combined")
 # Combined contaminant classification (prevalence and frequency) with 0.2
 occ2 <- isContaminant(ps, conc = conc2, neg = neg2, method = "combined",
-                     threshold = 0.2)
+                      threshold = 0.2)
 
 # create histograms to look at ASVs with different methods
 freqhist <- hist(ocf$p, breaks = 60)

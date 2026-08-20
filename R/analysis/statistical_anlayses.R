@@ -17,7 +17,6 @@ library("ggeffects")
 library("sjPlot")
 
 # load in all relevant phyloseq objects
-load("data/modified/zoolynx/intermediates/with_phyla_ps.Rdata") # ps1
 load("data/modified/zoolynx/intermediates/taxa_filtered_ps.Rdata") # ps2
 load("data/modified/zoolynx/intermediates/genus_grouped_ps.Rdata") # ps3
 load("data/modified/zoolynx/intermediates/ra_genus_grouped_ps.Rdata") # ps3ra
@@ -44,6 +43,15 @@ metadata_beta$DayF <- as.factor(metadata_beta$Day)
 bc_perm_f <- adonis2(bc_dist ~ DayF, data = metadata_beta, permutations = 999,
                      strata = metadata_beta$ScatID)
 # explains closer to 10% of variation, but much lower F value
+
+# repeat with Date
+bc_perm_dat <- adonis2(bc_dist ~ Date, data = metadata_beta, permutations = 999,
+                       strata = metadata_beta$ScatID)
+# significant, 11.8% of variation
+# check dispersion
+bc_bd_dat <- betadisper(bc_dist, metadata_beta$Date)
+permutest(bc_bd_dat, permutations = 999)
+# dispersion gets weird because there's only one sample on the last date
 
 ## repeat PERMANOVA with weighted UniFrac
 wu_dist <- distance(ps3, method = "wunifrac")
@@ -113,6 +121,42 @@ legend(1.25, 2.25, legend = levels(metadata_beta$DayF), col = point_colors,
        pch = 16, title = "Day")
 dev.off()
 
+# create combined dbRDA plot
+pdf("figures/analysis/both_dbRDA_Day.pdf", width = 8, height = 12)
+par(mfrow = c(2, 1), mar = c(4, 4, 2, 1), oma = c(0, 0, 0, 6))
+plot(bc_dbrda, type = "none", main = "Bray-Curtis Dissimilarity")
+points(bc_dbrda, display = "sites", col = point_colors, pch = 16)
+# add biplot arrows and a legend
+text(bc_dbrda, display = "bp", col = "black")
+# add weighted unifrac dbRDA
+plot(wu_dbrda, type = "none", main = "Weighted UniFrac Distance")
+points(wu_dbrda, display = "sites", col = point_colors, pch = 16)
+# add biplot arrows and a legend
+text(wu_dbrda, display = "bp", col = "black")
+par(xpd = NA)
+legend(2, 2.75, legend = levels(metadata_beta$DayF), col = point_colors,
+       pch = 16, title = "Day")
+par(mfrow = c(1, 1), oma = c(0, 0, 0, 0), xpd = FALSE)
+dev.off()
+# jpg combined dbRDA plot
+jpeg("figures/analysis/both_dbRDA_Day.jpeg", width = 2400, height = 3600,
+     res = 300)
+par(mfrow = c(2, 1), mar = c(4, 4, 2, 1), oma = c(0, 0, 0, 6))
+plot(bc_dbrda, type = "none", main = "Bray-Curtis Dissimilarity")
+points(bc_dbrda, display = "sites", col = point_colors, pch = 16)
+# add biplot arrows and a legend
+text(bc_dbrda, display = "bp", col = "black")
+# add weighted unifrac dbRDA
+plot(wu_dbrda, type = "none", main = "Weighted UniFrac Distance")
+points(wu_dbrda, display = "sites", col = point_colors, pch = 16)
+# add biplot arrows and a legend
+text(wu_dbrda, display = "bp", col = "black")
+par(xpd = NA)
+legend(2, 2.75, legend = levels(metadata_beta$DayF), col = point_colors,
+       pch = 16, title = "Day")
+par(mfrow = c(1, 1), oma = c(0, 0, 0, 0), xpd = FALSE)
+dev.off()
+
 # calculate Bray-Curtis distance between each sample and its day 0
 # convert to matrix that's easier to work with
 bc_dist_long <- melt(as.matrix(bc_dist),
@@ -133,38 +177,51 @@ bc_0_model <- lmer(BCDistance ~ Day + (1 | ScatID),
                    data = metadata_beta)
 summary(bc_0_model)
 
-# visualize mixed effects model
-plot_model(bc_0_model)
+# mixed effects model with individual as well
+bc_0_model2 <- lmer(BCDistance ~ Day + Individual + (1 | ScatID),
+                    data = metadata_beta)
+summary(bc_0_model2)
+anova(bc_0_model2)
+anova(bc_0_model, bc_0_model2)
+
+# visualize best mixed effects model
+plot_model(bc_0_model2)
 
 # look at day within the model
-predictions <- ggpredict(bc_0_model, terms = "Day")
-plot(predictions) +
+predictions <- ggpredict(bc_0_model2, terms = "Day")
+bc_0_pred <- plot(predictions) +
   labs(title = NULL, x = "Days since Defecation",
        y = "Bray-Curtis Dissimilarity") +
   theme_classic()
+bc_0_pred
 ggsave(filename = "Bray_Day0_MEM_Pred.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
-# Extract fixed effects only (marginal) vs. full effects (conditional)
-metadata_beta$Fixed_Fit <- predict(bc_0_model, re.form = NA)
-metadata_beta$Full_Fit <- predict(bc_0_model, re.form = NULL)
+# Extract full effects (conditional)
+metadata_beta$Full_Fit <- predict(bc_0_model2, re.form = NULL)
 
-# Plot raw data, fixed effect line, and subject-specific lines
-ggplot(metadata_beta, aes(x = Day, y = BCDistance)) +
+# Plot raw data and subject-specific lines
+bc_0_full <- ggplot(metadata_beta, aes(x = Day, y = BCDistance)) +
   geom_point(aes(color = Individual), alpha = 0.7) +
   geom_line(aes(y = Full_Fit, group = ScatID, color = Individual),
             alpha = 0.8) +
-  geom_line(aes(y = Fixed_Fit), color = "black", linewidth = 1.5) +
   scale_color_viridis_d() +
   labs(x = "Days since Defecation", y = "Bray-Curtis Dissimilarity") +
   theme_classic()
+bc_0_full
 ggsave(filename = "Bray_Day0_MEM_Full.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
 # plot random effects
-plot_model(bc_0_model, type = "re")
+plot_model(bc_0_model2, type = "re")
 # Residuals vs Fitted values plot
-plot(bc_0_model, type = c("p", "smooth"))
+plot(bc_0_model2, type = c("p", "smooth"))
+
+# mixed effects model on diff from day 0 by date
+bc_0_model_dat <- lmer(BCDistance ~ Date + Day + (1 | ScatID),
+                       data = metadata_beta)
+summary(bc_0_model_dat)
+anova(bc_0_model_dat)
 
 # filter to only include pairs comparing Day 0 to Day 0
 day0_bc_dists <- subset(day0_bc_dist, grepl("-00$", Sample1))
@@ -218,25 +275,27 @@ summary(shannon_model)
 plot_model(shannon_model)
 
 # look at day within the model
-predictions <- ggpredict(shannon_model, terms = "Day")
-plot(predictions) +
+predictions_a <- ggpredict(shannon_model, terms = "Day")
+shan_pred <- plot(predictions_a) +
   labs(title = NULL, x = "Days since Defecation",
        y = "Shannon Index") +
   theme_classic()
+shan_pred
 ggsave(filename = "Shannon_MEM_Pred.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
-# Extract fixed effects only (marginal) vs. full effects (conditional)
+# Extract full effects (conditional)
 metadata_alpha$Full_Fit <- predict(shannon_model, re.form = NULL)
 
 # Plot raw data and subject-specific lines
-ggplot(metadata_alpha, aes(x = Day, y = Shannon)) +
+shan_full <- ggplot(metadata_alpha, aes(x = Day, y = Shannon)) +
   geom_point(aes(color = Individual), alpha = 0.8) +
   geom_line(aes(y = Full_Fit, group = ScatID, color = Individual),
             alpha = 1) +
   scale_color_viridis_d() +
   labs(x = "Days since Defecation", y = "Shannon Index") +
   theme_classic()
+shan_full
 ggsave(filename = "Shannon_MEM_Full.jpg",
        path = "figures/analysis", height = 12, width = 8, units = "in")
 
