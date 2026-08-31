@@ -28,6 +28,8 @@ PERMANOVA and dbRDA with vegan (adonis2 and dbrda): Oksanen J, Simpson G, Blanch
 
 Linear mixed-effects models with lme4 (lmer): Bates D, Mächler M, Bolker B, and Walker S. 2015. Fitting Linear Mixed-Effects Models Using lme4. _Journal of Statistical Software_ 67: 1–48.
 
+_p-value_ added by lmerTest: Kuznetsova A, Brockhoff PB, Christensen RHB. 2017. lmerTest Package: Tests in Linear Mixed Effects Models. _Journal of Statistical Software_ 82(13): 1–26. https://doi.org/10.18637/jss.v082.i13
+
 ## Figures
 Figure outputs sorted by quality control and analysis steps
 
