@@ -8,34 +8,31 @@ Taxonomy training files
 ## R
 Specific workflow detailed in [R README](/R/README.md)
 
-All code divided into subfolders based on these general functions:
+All code divided into subfolders based on these general categories:
 
 ### Clean up data 
 Initial fastq clean up code modified from [Callahan et al. 2016](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4955027/)
 
-Taxonomy assignment: Wang, Q, G. M. Garrity, J. M. Tiedje, and J. R. Cole. 2007. Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Appl Environ Microbiol. 73(16):5261-7.
+Taxonomy assignment: Murali A, Bhargava A, and Wright ES. 2018. IDTAXA: a novel approach for accurate taxonomic classification of microbiome sequences. Microbiome 6: 140.
+
+Contaminant removal: Davis NM, Proctor DM, Holmes SP, et al. 2018. Simple statistical identification and removal of contaminant sequences in marker-gene and metagenomics data. Microbiome 6: 226. 
 
 ### Analysis of data 
-(in progress)
-## Results
-Outputs from analysis
-## Tables
-Example Table
-Species | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7
-------- | ------- | -------- | -------- | -------- | -------- | -------- | --------
-1 | 0.5 | 0.4 | 0.35 | 0.3 | 0.25 | 0.2 | 0.1
-2 | 0.25 | 0.25 | 0.2 | 0.15 | 0.15 | 0.1 | 0.05
-3 | 0.125 | 0.2 | 0.25 | 0.3 | 0.35 | 0.4 | 0.5
-4 | 0.125 | 0.15 | 0.2 | 0.25 | 0.25 | 0.3 | 0.35
+Preliminary filtering and analysis also modified from [Callahan et al. 2016](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4955027/)
 
-MaAsLin2: Mallick H, Rahnavard A, McIver LJ, Ma S, Zhang Y, Nguyen LH, Tickle TL, Weingart G, Ren B, Schwager EH, Chatterjee S, Thompson KN, Wilkinson JE, Subramanian A, Lu Y, Waldron L, Paulson JN, Franzosa EA, Bravo HC, Huttenhower C (2021). Multivariable Association Discovery in Population-scale Meta-omics Studies. PLoS Computational Biology, 17(11):e1009442.
+Time series analysis with BiomeHorizon (not used in report): Fink I, Abdill RJ, Blekhman R, and Grieneisen L. 2022. BiomeHorizon: Visualizing Microbiome Time Series Data in R. _mSystems_ 7: e01380-21.
+
+Distance metrics calculation with phyloseq (distance function): McMurdie PJ and Holmes S. 2013. phyloseq: An R Package for Reproducible Interactive Analysis and Graphics of Microbiome Census Data. _PLOS ONE_ 8: e61217.
+
+PERMANOVA and dbRDA with vegan (adonis2 and dbrda): Oksanen J, Simpson G, Blanchet F, Kindt R, Legendre P, Minchin P, O'Hara R, Solymos P, Stevens M, Szoecs E, Wagner H, Bedward M, Bolker B, Borcard D, Carvalho G, De Caceres M, Durand S, Evangelista H, Hannigan G, Hill M, Lahti L, Martino C, Ouellette M, Ribeiro Cunha E, Smith T, Stier A, Ter Braak C, Weedon J. 2026. _vegan: Community Ecology Package_. R package version 2.7-5, <https://CRAN.R-project.org/package=vegan>.
+
+Linear mixed-effects models with lme4 (lmer): Bates D, Mächler M, Bolker B, and Walker S. 2015. Fitting Linear Mixed-Effects Models Using lme4. _Journal of Statistical Software_ 67: 1–48.
+
 ## Figures
-Figure outputs 
+Figure outputs sorted by quality control and analysis steps
+
+Some quality control plots linked here:
 
 [Error Plot with Nucleotide Changes for Forward Reads](/figures/qaqc/Forward_Error_Plot.pdf)
 
 [Error Plot with Nucleotide Changes for Reverse Reads](/figures/qaqc/Reverse_Error_Plot.pdf)
-
-## Equations 
-(will update with any actual equations used, currently just here for formatting)
-$$x_n=3^p+\dfrac{15}{x+p}$$
