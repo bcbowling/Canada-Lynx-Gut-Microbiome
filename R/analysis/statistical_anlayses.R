@@ -307,12 +307,3 @@ plot(shannon_model, type = c("p", "smooth"))
 # GAMs (Generalized Additive Models)
 shan_gam <- gam(Shannon ~ Day, data = metadata_alpha, method = "REML")
 summary(shan_gam)
-
-# on hold for now
-#### Question 3: Which taxa change with age? ####
-# MaAsLin2
-# fixed effects = day
-# random effects = individual ID
-library("Maaslin2")
-# Example conceptual model:
-Taxon_abundance ~ day + (1 | lynx_ID)
